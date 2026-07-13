@@ -1,0 +1,15 @@
+{
+  "data": [
+    { "id": "cat_income", "label": "Income", "icon": "In", "isSpending": false },
+    { "id": "cat_transfer", "label": "Transfers", "icon": "Tf", "isSpending": false },
+    { "id": "cat_dining", "label": "Dining", "icon": "Di", "isSpending": true },
+    { "id": "cat_groceries", "label": "Groceries", "icon": "Gr", "isSpending": true },
+    { "id": "cat_transport", "label": "Transport", "icon": "Tr", "isSpending": true },
+    { "id": "cat_bills", "label": "Bills", "icon": "Bi", "isSpending": true },
+    { "id": "cat_shopping", "label": "Shopping", "icon": "Sh", "isSpending": true }
+  ],
+  "meta": {
+    "note": "isSpending=false rows (income, transfers) are excluded from spend-by-category totals.",
+    "generatedAt": "2026-07-10T07:30:00+08:00"
+  }
+}

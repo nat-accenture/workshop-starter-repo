@@ -1,0 +1,18 @@
+{
+  "name": "SpectrumOS Workshop (Meridian)",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:20",
+  "features": {},
+  "forwardPorts": [5173],
+  "postCreateCommand": "npm install && npm install -g ./vendor/spectrum-os-2.0.3.tgz",
+  "customizations": {
+    "vscode": {
+      "extensions": []
+    }
+  },
+  "remarks": [
+    "OPTIONAL FALLBACK ONLY. The workshop runs on local installs.",
+    "If a laptop blocks a local install, open the starter-repo folder in a cloud dev environment (for example GitHub Codespaces) so the participant can still take part.",
+    "This container provides Node, installs the app dependencies, and installs the SpectrumOS CLI from vendor/. The Playwright responsive test is optional and not needed to take part.",
+    "Claude Code must still be authenticated inside the container. SpectrumOS is bundled in vendor/ and its CLI is installed here; run 'spectrum-os' once to wire the /spec-* commands into ~/.claude."
+  ]
+}

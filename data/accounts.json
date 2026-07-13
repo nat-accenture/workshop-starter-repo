@@ -1,0 +1,45 @@
+{
+  "data": [
+    {
+      "id": "acc_everyday",
+      "name": "Everyday",
+      "type": "checking",
+      "currency": "SGD",
+      "accountNumberMasked": "•••• 4021",
+      "balanceMinor": 841290,
+      "availableMinor": 841290,
+      "changePct7d": 2.4
+    },
+    {
+      "id": "acc_savings",
+      "name": "Holiday fund",
+      "type": "savings",
+      "currency": "SGD",
+      "accountNumberMasked": "•••• 7788",
+      "balanceMinor": 360000,
+      "availableMinor": 360000,
+      "changePct7d": 1.6,
+      "goal": {
+        "label": "Holiday fund",
+        "targetMinor": 500000
+      }
+    },
+    {
+      "id": "acc_spend",
+      "name": "Travel card",
+      "type": "credit",
+      "currency": "SGD",
+      "accountNumberMasked": "•••• 1150",
+      "balanceMinor": -128040,
+      "availableMinor": 871960,
+      "creditLimitMinor": 1000000,
+      "changePct7d": -3.1
+    }
+  ],
+  "meta": {
+    "customerName": "Alex Tan",
+    "currency": "SGD",
+    "locale": "en-SG",
+    "generatedAt": "2026-07-10T07:30:00+08:00"
+  }
+}

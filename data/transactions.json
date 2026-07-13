@@ -1,0 +1,24 @@
+{
+  "data": [
+    { "id": "txn_0001", "accountId": "acc_everyday", "postedAt": "2026-07-09T08:14:00+08:00", "description": "Coffee House", "merchant": "Coffee House", "categoryId": "cat_dining", "amountMinor": -620, "status": "posted" },
+    { "id": "txn_0002", "accountId": "acc_everyday", "postedAt": "2026-07-09T07:50:00+08:00", "description": "Starbucks Raffles Place", "merchant": "Starbucks", "categoryId": "cat_dining", "amountMinor": -760, "status": "posted" },
+    { "id": "txn_0003", "accountId": "acc_everyday", "postedAt": "2026-07-08T19:40:00+08:00", "description": "Cold Storage", "merchant": "Cold Storage", "categoryId": "cat_groceries", "amountMinor": -8435, "status": "posted" },
+    { "id": "txn_0004", "accountId": "acc_everyday", "postedAt": "2026-07-08T09:02:00+08:00", "description": "Grab ride", "merchant": "Grab", "categoryId": "cat_transport", "amountMinor": -1280, "status": "posted" },
+    { "id": "txn_0005", "accountId": "acc_spend", "postedAt": "2026-07-07T12:15:00+08:00", "description": "Din Tai Fung", "merchant": "Din Tai Fung", "categoryId": "cat_dining", "amountMinor": -4200, "status": "posted" },
+    { "id": "txn_0006", "accountId": "acc_spend", "postedAt": "2026-07-06T21:03:00+08:00", "description": "Shopee order", "merchant": "Shopee", "categoryId": "cat_shopping", "amountMinor": -6790, "status": "posted" },
+    { "id": "txn_0007", "accountId": "acc_everyday", "postedAt": "2026-07-05T00:00:00+08:00", "description": "Singtel bill", "merchant": "Singtel", "categoryId": "cat_bills", "amountMinor": -8900, "status": "posted" },
+    { "id": "txn_0008", "accountId": "acc_everyday", "postedAt": "2026-07-04T08:30:00+08:00", "description": "EZ-Link top up", "merchant": "EZ-Link", "categoryId": "cat_transport", "amountMinor": -2000, "status": "posted" },
+    { "id": "txn_0009", "accountId": "acc_everyday", "postedAt": "2026-07-03T13:20:00+08:00", "description": "Kopitiam lunch", "merchant": "Kopitiam", "categoryId": "cat_dining", "amountMinor": -940, "status": "posted" },
+    { "id": "txn_0010", "accountId": "acc_spend", "postedAt": "2026-07-02T18:22:00+08:00", "description": "Guardian Pharmacy", "merchant": "Guardian", "categoryId": "cat_shopping", "amountMinor": -3150, "status": "posted" },
+    { "id": "txn_0011", "accountId": "acc_everyday", "postedAt": "2026-07-01T09:06:00+08:00", "description": "Transfer to Holiday fund", "merchant": "Meridian transfer", "categoryId": "cat_transfer", "amountMinor": -50000, "status": "posted" },
+    { "id": "txn_0012", "accountId": "acc_savings", "postedAt": "2026-07-01T09:06:00+08:00", "description": "Transfer from Everyday", "merchant": "Meridian transfer", "categoryId": "cat_transfer", "amountMinor": 50000, "status": "posted" },
+    { "id": "txn_0013", "accountId": "acc_everyday", "postedAt": "2026-07-01T09:00:00+08:00", "description": "Salary - Northwind Pte Ltd", "merchant": "Northwind Pte Ltd", "categoryId": "cat_income", "amountMinor": 480000, "status": "posted" },
+    { "id": "txn_0014", "accountId": "acc_everyday", "postedAt": "2026-06-30T20:10:00+08:00", "description": "Netflix", "merchant": "Netflix", "categoryId": "cat_bills", "amountMinor": -1998, "status": "posted" }
+  ],
+  "meta": {
+    "accountId": "all",
+    "count": 14,
+    "currency": "SGD",
+    "generatedAt": "2026-07-10T07:30:00+08:00"
+  }
+}

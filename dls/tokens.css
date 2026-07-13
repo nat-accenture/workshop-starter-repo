@@ -1,0 +1,91 @@
+/* ============================================================
+   Meridian Bank - Design Language System
+   LAYER: design contract (tokens)
+
+   These are the design decisions. Everything visual in the app
+   is built from these values. The rule is simple and the agent
+   obeys it: use a token, never a raw hex or pixel value.
+
+   Change a token here and it changes everywhere at once. That is
+   the point of a design system.
+   ============================================================ */
+
+:root {
+  /* ---- Brand + action colours ---- */
+  --color-brand: #0A2540;          /* deep navy: header, brand ink */
+  --color-primary: #1657E0;        /* the one action blue */
+  --color-primary-strong: #0E3FAE; /* hover / pressed */
+  --color-primary-tint: #E7EEFF;   /* soft fill, focus ring */
+
+  /* ---- Money + status semantics ---- */
+  --color-positive: #0E7C4A;       /* money in, credits, on track */
+  --color-positive-tint: #E4F5EC;
+  --color-negative: #C0341D;       /* money out warnings, over budget */
+  --color-negative-tint: #FBE9E5;
+  --color-warning: #B4690E;
+  --color-warning-tint: #FBF0DF;
+  --color-accent: #0E7490;         /* teal: savings + goals */
+  --color-accent-tint: #E0F2F4;
+
+  /* ---- Text ---- */
+  --color-ink: #0A2540;            /* primary text */
+  --color-ink-soft: #45566B;       /* secondary text */
+  --color-muted: #6B7A90;          /* labels, captions */
+
+  /* ---- Surfaces + lines ---- */
+  --color-surface: #FFFFFF;        /* cards */
+  --color-surface-sunken: #F4F6FB; /* inset areas, icon wells */
+  --color-canvas: #EEF2F8;         /* page background */
+  --color-line: #E2E8F0;           /* borders, dividers */
+
+  /* ---- Spacing (4px base) ---- */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+
+  /* ---- Radius ---- */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-pill: 999px;
+
+  /* ---- Typography ---- */
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Helvetica, Arial, sans-serif;
+  --text-xs: 12px;
+  --text-sm: 13px;
+  --text-base: 15px;
+  --text-md: 16px;
+  --text-lg: 18px;
+  --text-xl: 22px;
+  --text-2xl: 28px;
+  --text-3xl: 36px;
+  --text-display: 44px;
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+  --leading-tight: 1.15;
+  --leading-snug: 1.3;
+  --leading-normal: 1.5;
+
+  /* ---- Elevation ---- */
+  --shadow-1: 0 1px 2px rgba(10, 37, 64, 0.06);
+  --shadow-2: 0 4px 16px rgba(10, 37, 64, 0.08);
+  --shadow-3: 0 12px 32px rgba(10, 37, 64, 0.12);
+
+  /* ---- Motion ---- */
+  --dur-fast: 120ms;
+  --dur: 200ms;
+  --dur-slow: 320ms;
+  --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* Dark mode is a deliberate future extension. When it lands it
+   overrides these same token names inside a [data-theme="dark"]
+   block, and every component follows automatically. */

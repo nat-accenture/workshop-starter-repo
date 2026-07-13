@@ -1,0 +1,15 @@
+{
+  "name": "meridian-dashboard",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Meridian Bank customer dashboard - SpectrumOS workshop starter app.",
+  "scripts": {
+    "serve": "serve . -l 5173",
+    "test:responsive": "playwright test",
+    "test:responsive:report": "playwright show-report"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.48.0",
+    "serve": "^14.2.4"
+  }
+}
