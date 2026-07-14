@@ -1,0 +1,137 @@
+/* Meridian - app shell layout + gallery scaffolding.
+   This file is ONLY page chrome and layout. Every colour, spacing, type,
+   radius and shadow is a DLS token from tokens.css; the reusable components
+   are the mrdn- classes in components.css. No raw values live here. */
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  color: var(--color-ink);
+  background: var(--color-canvas);
+  line-height: var(--leading-normal);
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: inherit; }
+
+/* ============================================================
+   App bar
+   ============================================================ */
+.app-bar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding: var(--space-4) clamp(var(--space-4), 5vw, var(--space-7));
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-line);
+}
+.app-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  text-decoration: none;
+}
+.app-mark { display: inline-flex; }
+.app-wordmark {
+  font-size: var(--text-lg);
+  font-weight: var(--weight-bold);
+  letter-spacing: -0.01em;
+  color: var(--color-brand);
+}
+.app-bar__right { display: inline-flex; align-items: center; gap: var(--space-3); }
+.app-greeting { font-size: var(--text-base); font-weight: var(--weight-medium); color: var(--color-ink-soft); }
+
+/* On small screens the app bar tightens: hide the greeting (the avatar still
+   identifies the user) and collapse the nav links to their icons so nothing
+   wraps or clips. The links stay reachable and accessible via aria-label. */
+@media (max-width: 640px) {
+  .app-greeting { display: none; }
+  .app-bar__label { display: none; }
+}
+
+/* ============================================================
+   Dashboard canvas
+   ============================================================ */
+.dashboard {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: clamp(var(--space-5), 4vw, var(--space-7)) clamp(var(--space-4), 5vw, var(--space-7));
+}
+.dashboard__head { margin-bottom: var(--space-6); }
+.dashboard__head h1 {
+  margin: 0;
+  font-size: var(--text-2xl);
+  font-weight: var(--weight-bold);
+  letter-spacing: -0.01em;
+}
+.dashboard__sub { margin: var(--space-1) 0 0; color: var(--color-muted); }
+
+/* Balance summary strip: three account cards */
+.account-strip {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-5);
+}
+@media (max-width: 640px) {
+  .account-strip { grid-template-columns: 1fr; }
+}
+
+/* Empty / loading / error state for widget cards */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-1);
+  min-height: 148px; /* placeholder card height: intentional layout scaffolding */
+  padding: var(--space-5);
+  text-align: center;
+  border: 1px dashed var(--color-line);
+  border-radius: var(--radius-md);
+}
+.empty-state__title { margin: 0; font-weight: var(--weight-semibold); color: var(--color-ink-soft); }
+.empty-state__body { margin: 0; font-size: var(--text-sm); color: var(--color-muted); }
+
+/* Muted caption used inside cards (e.g. "x to go") */
+.app-caption { font-size: var(--text-sm); color: var(--color-muted); }
+
+/* ============================================================
+   Kitchen sink gallery (reference frame around the DLS, like preview.html).
+   Every colour is a token; a few layout sizes are gallery scaffolding.
+   ============================================================ */
+.ks-wrap {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: clamp(var(--space-5), 4vw, var(--space-7)) clamp(var(--space-4), 5vw, var(--space-7));
+}
+.ks-head { margin-bottom: var(--space-6); }
+.ks-head h1 { margin: 0; font-size: var(--text-2xl); font-weight: var(--weight-bold); letter-spacing: -0.01em; }
+.ks-head p { margin: var(--space-1) 0 0; color: var(--color-muted); }
+.ks-section { margin: var(--space-7) 0; }
+.ks-section > h2 { margin: 0 0 var(--space-4); }
+.ks-note { color: var(--color-muted); font-size: var(--text-sm); margin: 0 0 var(--space-4); }
+
+.ks-swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(9rem, 1fr)); gap: var(--space-4); }
+.ks-swatch__chip { height: var(--space-8); border-radius: var(--radius-md); border: 1px solid var(--color-line); box-shadow: var(--shadow-1); }
+.ks-swatch__name { display: block; font-size: var(--text-sm); font-weight: var(--weight-medium); color: var(--color-ink); margin-top: var(--space-2); }
+.ks-swatch__val { display: block; font-size: var(--text-xs); color: var(--color-muted); font-variant-numeric: tabular-nums; text-transform: uppercase; }
+
+.ks-type-row { display: flex; align-items: baseline; gap: var(--space-4); padding: var(--space-2) 0; border-bottom: 1px solid var(--color-line); }
+.ks-type-row:last-child { border-bottom: none; }
+.ks-type-row > .ks-type-label { flex: none; width: 6rem; color: var(--color-muted); font-size: var(--text-xs); }
+
+.ks-scale-row { display: flex; align-items: center; gap: var(--space-4); padding: var(--space-2) 0; }
+.ks-scale-row > .ks-scale-label { flex: none; width: 5rem; color: var(--color-muted); font-size: var(--text-xs); }
+.ks-space-bar { height: var(--space-3); background: var(--color-primary); border-radius: var(--radius-pill); }
+.ks-radius-box { width: var(--space-8); height: var(--space-8); background: var(--color-surface-sunken); border: 1px solid var(--color-line); }
+
+.ks-elevation { display: grid; grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr)); gap: var(--space-5); }
+.ks-elevation__card { background: var(--color-surface); border: 1px solid var(--color-line); border-radius: var(--radius-lg); padding: var(--space-5); color: var(--color-ink-soft); font-size: var(--text-sm); }
+
+.ks-cell { background: var(--color-surface-sunken); border: 1px solid var(--color-line); border-radius: var(--radius-md); padding: var(--space-4); text-align: center; color: var(--color-ink-soft); font-weight: var(--weight-semibold); font-size: var(--text-sm); }

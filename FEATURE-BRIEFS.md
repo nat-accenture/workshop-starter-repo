@@ -13,7 +13,12 @@ How to run one:
 /spec-quick "PASTE ONE BRIEF HERE"
 ```
 
-The three open hooks below are the heart of the dashboard. The room builds #1 together first, then you pick #2 or #3.
+> Note: briefs #1-#3 below now ship **built** in `src/features/dashboard/` as a
+> reference implementation (React + TypeScript). Read them to see how a brief maps
+> to a widget, then practise the loop on a **Stretch** brief at the bottom.
+
+The three hooks below are the heart of the dashboard. They are implemented as
+`RecentActivity.tsx`, `SpendByCategory.tsx`, and `SavingsGoal.tsx`.
 
 ---
 

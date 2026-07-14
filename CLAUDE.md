@@ -60,7 +60,7 @@ Treat Rule 0 as a hard gate in the `/spec-*` loop:
 
 ## Other standing rules
 - **Money:** SGD, `en-SG`, stored in minor units. Format with `formatSGD()` from
-  `data/api.js`; never divide-and-concatenate by hand. Use `.mrdn-amount`
+  `data/api.ts`; never divide-and-concatenate by hand. Use `.mrdn-amount`
   (`.is-credit` for money in, `.is-over` only for a breached limit). See
   `dls/DLS-RULES.md` rule 3.
 - **Accessibility:** visible `:focus-visible` rings, ≥44px hit targets, semantic

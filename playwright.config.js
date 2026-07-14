@@ -32,9 +32,10 @@ module.exports = defineConfig({
     },
   ],
   webServer: {
-    command: `npx serve . -l ${PORT}`,
+    // Build the app, then serve the production bundle on the contract port.
+    command: `npm run build && npm run preview`,
     url: baseURL,
     reuseExistingServer: !process.env.CI,
-    timeout: 60000,
+    timeout: 120000,
   },
 });

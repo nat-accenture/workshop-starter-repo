@@ -4,8 +4,9 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Meridian | Your money today</title>
-  <meta name="description" content="Meridian Bank customer dashboard, the SpectrumOS workshop demo app." />
-  <!-- Set the theme before first paint to avoid a flash of the wrong mode. -->
+  <meta name="description" content="Meridian Bank customer dashboard, a React + TypeScript app on the SpectrumOS DLS." />
+  <!-- Set the theme before first paint to avoid a flash of the wrong mode.
+       The React ThemeProvider reads this attribute on mount. -->
   <script>
     (function () {
       try {
@@ -16,137 +17,9 @@
       } catch (e) {}
     })();
   </script>
-  <!-- The design contract: tokens and components come first, so the app is on brand by default. -->
-  <link rel="stylesheet" href="dls/tokens.css" />
-  <link rel="stylesheet" href="dls/components.css" />
-  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <!--
-    MERIDIAN DASHBOARD (SpectrumOS workshop app)
-    Balance summary and quick actions are already built, so the page
-    looks real the moment you open it. Three widgets are left as HOOKS
-    for you to build with SpectrumOS. See FEATURE-BRIEFS.md.
-
-    Layers this app is built on:
-      dls/     the design contract  (how it looks)
-      data/    the data contract    (what it shows, shaped like a real API)
-      tests/   the behaviour contract (that it works, responsively)
-  -->
-
-  <header class="app-bar">
-    <a class="app-brand" href="#" aria-label="Meridian home">
-      <span class="app-mark" aria-hidden="true">
-        <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="14" cy="14" r="13" fill="var(--color-brand)" />
-          <line x1="2" y1="14" x2="26" y2="14" stroke="#fff" stroke-width="1.4" opacity="0.6" />
-          <path d="M14 1.5 C 8 7, 8 21, 14 26.5" stroke="#fff" stroke-width="1.6" />
-          <path d="M14 1.5 C 20 7, 20 21, 14 26.5" stroke="#fff" stroke-width="1.6" opacity="0.6" />
-        </svg>
-      </span>
-      <span class="app-wordmark">Meridian</span>
-    </a>
-    <div class="app-bar__right">
-      <a class="mrdn-btn mrdn-btn--ghost" href="kitchen-sink.html" aria-label="Kitchen sink">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <rect x="3" y="3" width="7" height="7" rx="1.5" />
-          <rect x="14" y="3" width="7" height="7" rx="1.5" />
-          <rect x="3" y="14" width="7" height="7" rx="1.5" />
-          <rect x="14" y="14" width="7" height="7" rx="1.5" />
-        </svg>
-        <span class="app-bar__label">Kitchen sink</span>
-      </a>
-      <button class="mrdn-btn mrdn-btn--ghost" type="button" data-theme-toggle aria-label="Switch to dark mode">
-        <svg data-icon-moon width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z" />
-        </svg>
-        <svg data-icon-sun style="display: none" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <circle cx="12" cy="12" r="4" />
-          <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" />
-        </svg>
-      </button>
-      <span class="app-greeting">Alex Tan</span>
-      <span class="mrdn-avatar" aria-hidden="true">AT</span>
-    </div>
-  </header>
-
-  <main class="dashboard">
-    <div class="dashboard__head">
-      <h1>Good morning, Alex</h1>
-      <p class="dashboard__sub">Here is your money at a glance.</p>
-    </div>
-
-    <div class="mrdn-grid">
-      <!-- Balance summary (PRE-BUILT). app.js renderAccounts() fills #accounts from the mock API. -->
-      <section class="mrdn-col-12" aria-label="Account balances">
-        <div class="account-strip" id="accounts"></div>
-      </section>
-
-      <!-- Recent transactions (OPEN HOOK 1). Build with FEATURE-BRIEFS #1. -->
-      <section class="mrdn-col-8">
-        <div class="mrdn-card">
-          <div class="mrdn-card__header">
-            <span class="mrdn-card__title">Recent activity</span>
-          </div>
-          <!-- app.js renderTransactions() should fill #transactions -->
-          <div id="transactions">
-            <div class="empty-state">
-              <p class="empty-state__title">Not built yet</p>
-              <p class="empty-state__body">Your feature fills this in.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Quick actions (PRE-BUILT). Static, no data needed. -->
-      <section class="mrdn-col-4">
-        <div class="mrdn-card">
-          <div class="mrdn-card__header">
-            <span class="mrdn-card__title">Quick actions</span>
-          </div>
-          <div class="mrdn-stack">
-            <button class="mrdn-btn mrdn-btn--primary mrdn-btn--block" type="button">Transfer</button>
-            <button class="mrdn-btn mrdn-btn--secondary mrdn-btn--block" type="button">Pay a bill</button>
-            <button class="mrdn-btn mrdn-btn--secondary mrdn-btn--block" type="button">Add money</button>
-          </div>
-        </div>
-      </section>
-
-      <!-- Spend by category (OPEN HOOK 2). Build with FEATURE-BRIEFS #2. -->
-      <section class="mrdn-col-6">
-        <div class="mrdn-card">
-          <div class="mrdn-card__header">
-            <span class="mrdn-card__title">Spend by category</span>
-          </div>
-          <!-- app.js renderSpendByCategory() should fill #spend -->
-          <div id="spend">
-            <div class="empty-state">
-              <p class="empty-state__title">Not built yet</p>
-              <p class="empty-state__body">Your feature fills this in.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Savings goal (OPEN HOOK 3). Build with FEATURE-BRIEFS #3. -->
-      <section class="mrdn-col-6">
-        <div class="mrdn-card">
-          <div class="mrdn-card__header">
-            <span class="mrdn-card__title">Savings goal</span>
-          </div>
-          <!-- app.js renderSavingsGoal() should fill #savings -->
-          <div id="savings">
-            <div class="empty-state">
-              <p class="empty-state__title">Not built yet</p>
-              <p class="empty-state__body">Your feature fills this in.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-    </div>
-  </main>
-
-  <script type="module" src="theme.js"></script>
-  <script type="module" src="app.js"></script>
+  <div id="root"></div>
+  <script type="module" src="/src/main.tsx"></script>
 </body>
 </html>

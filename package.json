@@ -1,15 +1,27 @@
 {
   "name": "meridian-dashboard",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "private": true,
-  "description": "Meridian Bank customer dashboard - SpectrumOS workshop starter app.",
+  "description": "Meridian Bank customer dashboard - React + TypeScript app on the SpectrumOS DLS.",
   "scripts": {
-    "serve": "serve . -l 5173",
+    "dev": "vite",
+    "serve": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview --port 5173 --strictPort",
     "test:responsive": "playwright test",
     "test:responsive:report": "playwright show-report"
   },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.26.2"
+  },
   "devDependencies": {
     "@playwright/test": "^1.48.0",
-    "serve": "^14.2.4"
+    "@types/react": "^18.3.11",
+    "@types/react-dom": "^18.3.1",
+    "@vitejs/plugin-react": "^4.3.2",
+    "typescript": "^5.6.3",
+    "vite": "^5.4.9"
   }
 }
