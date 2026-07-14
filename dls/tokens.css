@@ -8,37 +8,41 @@
 
    Change a token here and it changes everywhere at once. That is
    the point of a design system.
+
+   PALETTE: "Graphite & Indigo" - a restrained, professional
+   banking palette. One confident indigo action colour, a deep
+   teal for savings/goals, and the two money semantics (in / out).
+   Everything else is a cool neutral scale. Fewer hues, on purpose.
    ============================================================ */
 
 :root {
   color-scheme: light;
 
   /* ---- Brand + action colours ---- */
-  --color-brand: #0A2540;          /* deep navy: header, brand ink */
-  --color-primary: #1657E0;        /* the one action blue */
-  --color-primary-strong: #0E3FAE; /* hover / pressed */
-  --color-primary-tint: #E7EEFF;   /* soft fill, focus ring */
+  --color-brand: #131A2B;          /* near-black indigo ink: header, brand */
+  --color-primary: #3355FF;        /* the one action indigo */
+  --color-primary-strong: #2440DB; /* hover / pressed */
+  --color-primary-tint: #ECEFFF;   /* soft fill, focus ring */
 
   /* ---- Money + status semantics ---- */
-  --color-positive: #0E7C4A;       /* money in, credits, on track */
-  --color-positive-tint: #E4F5EC;
-  --color-negative: #C0341D;       /* money out warnings, over budget */
-  --color-negative-tint: #FBE9E5;
-  --color-warning: #B4690E;
-  --color-warning-tint: #FBF0DF;
-  --color-accent: #0E7490;         /* teal: savings + goals */
-  --color-accent-tint: #E0F2F4;
+  --color-positive: #0B7A4B;       /* money in, credits, on track */
+  --color-positive-tint: #E3F5EC;
+  --color-negative: #BC3423;       /* money out warnings, over budget */
+  --color-negative-tint: #FBE9E7;
+  --color-accent: #0B6F79;         /* deep teal: savings + goals */
+  --color-accent-tint: #E1F1F3;
 
   /* ---- Text ---- */
-  --color-ink: #0A2540;            /* primary text */
-  --color-ink-soft: #45566B;       /* secondary text */
-  --color-muted: #6B7A90;          /* labels, captions */
+  --color-ink: #131A2B;            /* primary text */
+  --color-ink-soft: #47546B;       /* secondary text */
+  --color-muted: #5C6579;          /* labels, captions (AA on canvas) */
 
   /* ---- Surfaces + lines ---- */
   --color-surface: #FFFFFF;        /* cards */
-  --color-surface-sunken: #F4F6FB; /* inset areas, icon wells */
-  --color-canvas: #EEF2F8;         /* page background */
-  --color-line: #E2E8F0;           /* borders, dividers */
+  --color-surface-sunken: #F4F6FC; /* inset areas, icon wells */
+  --color-canvas: #EDF0F8;         /* page background */
+  --color-line: #E2E7F1;           /* borders, dividers */
+  --color-glow: rgba(255, 255, 255, 0.35); /* moving sheen on filled bars */
 
   /* ---- Spacing (4px base) ---- */
   --space-1: 4px;
@@ -77,15 +81,22 @@
   --leading-normal: 1.5;
 
   /* ---- Elevation ---- */
-  --shadow-1: 0 1px 2px rgba(10, 37, 64, 0.06);
-  --shadow-2: 0 4px 16px rgba(10, 37, 64, 0.08);
-  --shadow-3: 0 12px 32px rgba(10, 37, 64, 0.12);
+  --shadow-1: 0 1px 2px rgba(19, 26, 43, 0.06);
+  --shadow-2: 0 6px 20px rgba(19, 26, 43, 0.10);
+  --shadow-3: 0 16px 40px rgba(19, 26, 43, 0.16);
+  --shadow-focus: 0 0 0 3px var(--color-primary-tint);
 
-  /* ---- Motion ---- */
+  /* ---- Motion ----
+     Durations, easings and named keyframe presets. Components read
+     these so timing stays consistent. All motion collapses to nothing
+     under prefers-reduced-motion (see components.css). */
   --dur-fast: 120ms;
   --dur: 200ms;
   --dur-slow: 320ms;
+  --dur-slower: 560ms;
   --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1); /* gentle overshoot */
 }
 
 /* ============================================================
@@ -93,40 +104,41 @@
    Dark mode is expressed ONLY as overrides of the token names
    above. Components read tokens, so every one of them follows
    automatically, with no component CSS changes and no per-page styling.
-   Activated by setting [data-theme="dark"] on <html> (see src/theme/ThemeProvider.tsx).
+   Activated by setting [data-theme="dark"] on <html>
+   (see src/theme/ThemeProvider.tsx).
    ============================================================ */
 [data-theme="dark"] {
   color-scheme: dark;
 
   /* ---- Brand + action colours ---- */
-  --color-brand: #5E8BEF;          /* lighter brand blue: reads on dark surfaces */
-  --color-primary: #2F66DE;        /* action blue: white button text stays AA (~5:1) */
-  --color-primary-strong: #4C7CE8; /* hover / pressed */
-  --color-primary-tint: #DCE6FB;   /* kept light so focus rings + avatars stay visible */
+  --color-brand: #7C9BFF;          /* lighter brand indigo: reads on dark surfaces */
+  --color-primary: #4463EC;        /* action indigo: white button text stays AA (4.95:1) */
+  --color-primary-strong: #3552D8; /* hover / pressed (deeper) */
+  --color-primary-tint: #E4E9FF;   /* kept light so focus rings + avatars stay visible */
 
   /* ---- Money + status semantics ---- */
-  --color-positive: #3ECB84;       /* money in, credits, on track */
-  --color-positive-tint: #123020;
-  --color-negative: #F27A62;       /* money out warnings, over budget */
-  --color-negative-tint: #351811;
-  --color-warning: #E0A64B;
-  --color-warning-tint: #33260F;
-  --color-accent: #35B9CE;         /* teal: savings + goals */
-  --color-accent-tint: #0E2C33;
+  --color-positive: #35CE86;       /* money in, credits, on track */
+  --color-positive-tint: #10301F;
+  --color-negative: #FF7A66;       /* money out warnings, over budget */
+  --color-negative-tint: #341612;
+  --color-accent: #3BC0CE;         /* teal: savings + goals */
+  --color-accent-tint: #0C2C31;
 
   /* ---- Text ---- */
-  --color-ink: #EAF0F8;            /* primary text */
-  --color-ink-soft: #B4C0D4;       /* secondary text */
-  --color-muted: #8593AB;          /* labels, captions */
+  --color-ink: #E9EEF9;            /* primary text */
+  --color-ink-soft: #B2BFD4;       /* secondary text */
+  --color-muted: #8493AC;          /* labels, captions */
 
   /* ---- Surfaces + lines ---- */
-  --color-surface: #141E30;        /* cards (raised above canvas) */
-  --color-surface-sunken: #0E1826; /* inset areas, icon wells */
-  --color-canvas: #0B1220;         /* page background (darkest) */
-  --color-line: #26344A;           /* borders, dividers */
+  --color-surface: #141C2C;        /* cards (raised above canvas) */
+  --color-surface-sunken: #0E1522; /* inset areas, icon wells */
+  --color-canvas: #0A0F1A;         /* page background (darkest) */
+  --color-line: #26324A;           /* borders, dividers */
+  --color-glow: rgba(255, 255, 255, 0.22); /* moving sheen on filled bars */
 
   /* ---- Elevation (black-based so depth reads on a dark canvas) ---- */
   --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.4);
-  --shadow-2: 0 4px 16px rgba(0, 0, 0, 0.45);
-  --shadow-3: 0 12px 32px rgba(0, 0, 0, 0.5);
+  --shadow-2: 0 6px 20px rgba(0, 0, 0, 0.5);
+  --shadow-3: 0 16px 40px rgba(0, 0, 0, 0.55);
+  --shadow-focus: 0 0 0 3px var(--color-primary-tint);
 }

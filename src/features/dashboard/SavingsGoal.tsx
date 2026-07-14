@@ -8,6 +8,7 @@ import {
 } from "../../dls";
 import { formatSGD } from "../../../data/api";
 import type { Account } from "../../../data/types";
+import { useCountUp } from "../../hooks/useCountUp";
 
 // HOOK 3 - Savings goal (FEATURE-BRIEFS #3).
 // Shows progress toward the Holiday fund: saved of target, how much is left,
@@ -46,11 +47,19 @@ export function SavingsGoal({ accounts }: { accounts: Account[] }) {
           <span className="mrdn-stat__label">
             {formatSGD(saved)} of {formatSGD(target)}
           </span>
-          <span className="mrdn-stat__value">{pct}%</span>
+          <span className="mrdn-stat__value">
+            <AnimatedPercent value={pct} />
+          </span>
         </div>
         <Progress value={pct} label={`${savings.goal.label} progress`} />
         <span className="app-caption">{formatSGD(remaining)} to go</span>
       </Stack>
     </Card>
   );
+}
+
+// Counts the percentage up on load; lands exactly on the true value.
+function AnimatedPercent({ value }: { value: number }) {
+  const current = useCountUp(value);
+  return <>{Math.round(current)}%</>;
 }

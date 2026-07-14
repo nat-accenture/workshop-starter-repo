@@ -130,7 +130,14 @@ and the DLS gate below apply at build time no matter how the run got there.
   (`.is-credit` for money in, `.is-over` only for a breached limit). See
   `dls/DLS-RULES.md` rule 3.
 - **Accessibility:** visible `:focus-visible` rings, ≥44px hit targets, semantic
-  HTML, text alternatives for icons. Meridian is a bank; this is table stakes.
+  HTML, text alternatives for icons, AA text contrast. Meridian is a bank; this
+  is table stakes.
+- **Motion:** animate only with the motion tokens (`--dur*`, `--ease*`), keep it
+  purposeful, and make everything collapse under `prefers-reduced-motion`
+  (global reset in `dls/components.css`; JS uses `prefersReducedMotion()` from
+  `src/lib/motion.ts`). Keep entrance/transform animation off anything the
+  behaviour contract measures (account cards fade only). See `dls/DLS-RULES.md`
+  rule 6.
 - **Responsive:** the grid collapses to one column at ≤640px and must pass the
   behaviour contract in `tests/responsive.spec.js` (mobile, tablet, desktop).
 - **Data shape:** use the API shape in `data/DATA-CONTRACT.md`, not ad hoc data.

@@ -1,7 +1,9 @@
 /* Meridian - app shell layout + gallery scaffolding.
-   This file is ONLY page chrome and layout. Every colour, spacing, type,
-   radius and shadow is a DLS token from tokens.css; the reusable components
-   are the mrdn- classes in components.css. No raw values live here. */
+   This file is ONLY page chrome and layout. Every design value (colour,
+   spacing, type, radius, shadow, motion) is a DLS token from tokens.css, and
+   the reusable components are the mrdn- classes in components.css. The only raw
+   literals are a few inherent layout sizes with no covering token (page
+   max-width, a placeholder height), each marked "layout scaffolding" below. */
 
 * { box-sizing: border-box; }
 
@@ -12,6 +14,9 @@ body {
   background: var(--color-canvas);
   line-height: var(--leading-normal);
   -webkit-font-smoothing: antialiased;
+  /* Cross-fade the whole page when the theme flips. */
+  transition: background-color var(--dur) var(--ease-out),
+    color var(--dur) var(--ease-out);
 }
 
 a { color: inherit; }
@@ -30,6 +35,9 @@ a { color: inherit; }
   padding: var(--space-4) clamp(var(--space-4), 5vw, var(--space-7));
   background: var(--color-surface);
   border-bottom: 1px solid var(--color-line);
+  animation: mrdn-fade var(--dur-slow) var(--ease-out) both;
+  transition: background-color var(--dur) var(--ease-out),
+    border-color var(--dur) var(--ease-out);
 }
 .app-brand {
   display: inline-flex;
@@ -59,11 +67,14 @@ a { color: inherit; }
    Dashboard canvas
    ============================================================ */
 .dashboard {
-  max-width: 1120px;
+  max-width: 1120px; /* page max-width: layout scaffolding, no token */
   margin: 0 auto;
   padding: clamp(var(--space-5), 4vw, var(--space-7)) clamp(var(--space-4), 5vw, var(--space-7));
 }
-.dashboard__head { margin-bottom: var(--space-6); }
+.dashboard__head {
+  margin-bottom: var(--space-6);
+  animation: mrdn-rise var(--dur-slow) var(--ease-out) both;
+}
 .dashboard__head h1 {
   margin: 0;
   font-size: var(--text-2xl);
@@ -106,7 +117,7 @@ a { color: inherit; }
    Every colour is a token; a few layout sizes are gallery scaffolding.
    ============================================================ */
 .ks-wrap {
-  max-width: 1120px;
+  max-width: 1120px; /* page max-width: layout scaffolding, no token */
   margin: 0 auto;
   padding: clamp(var(--space-5), 4vw, var(--space-7)) clamp(var(--space-4), 5vw, var(--space-7));
 }

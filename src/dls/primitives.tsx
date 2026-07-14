@@ -7,11 +7,14 @@
 // stamp out that markup. Never add colours/spacing/radii here: use tokens in
 // the CSS layer instead.
 // ============================================================
+import { useEffect, useState } from "react";
 import type {
   ButtonHTMLAttributes,
+  CSSProperties,
   HTMLAttributes,
   ReactNode,
 } from "react";
+import { prefersReducedMotion } from "../lib/motion";
 
 const cx = (...parts: Array<string | false | null | undefined>): string =>
   parts.filter(Boolean).join(" ");
@@ -201,6 +204,20 @@ export function Progress({
   label?: string;
 }) {
   const pct = Math.max(0, Math.min(100, Math.round(value)));
+  // Grow the fill from 0 to pct on mount; the CSS transitions the width. Static
+  // under reduced motion. aria-valuenow always reports the true target.
+  const [width, setWidth] = useState<number>(() =>
+    prefersReducedMotion() ? pct : 0,
+  );
+  useEffect(() => {
+    if (prefersReducedMotion()) {
+      setWidth(pct);
+      return;
+    }
+    const id = requestAnimationFrame(() => setWidth(pct));
+    return () => cancelAnimationFrame(id);
+  }, [pct]);
+
   return (
     <div
       className="mrdn-progress__track"
@@ -210,8 +227,27 @@ export function Progress({
       aria-valuemax={100}
       aria-label={label}
     >
-      <div className="mrdn-progress__fill" style={{ width: `${pct}%` }} />
+      <div className="mrdn-progress__fill" style={{ width: `${width}%` }} />
     </div>
+  );
+}
+
+/* ---- Skeleton: shimmering loading placeholder ---- */
+export function Skeleton({
+  variant = "line",
+  className,
+  style,
+}: {
+  variant?: "line" | "title" | "stat" | "pill";
+  className?: string;
+  style?: CSSProperties;
+}) {
+  return (
+    <div
+      className={cx("mrdn-skeleton", `mrdn-skeleton--${variant}`, className)}
+      style={style}
+      aria-hidden="true"
+    />
   );
 }
 

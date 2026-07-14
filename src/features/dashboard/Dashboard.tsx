@@ -1,4 +1,4 @@
-import { Card, CardHeader, CardTitle, Col, Grid } from "../../dls";
+import { Card, CardHeader, CardTitle, Col, Grid, Skeleton, Stack } from "../../dls";
 import { useDashboardData } from "../../hooks/useDashboardData";
 import { Balances, BalancesSkeleton } from "./Balances";
 import { QuickActions } from "./QuickActions";
@@ -68,9 +68,11 @@ function LoadingCard({ title }: { title: string }) {
       <CardHeader>
         <CardTitle>{title}</CardTitle>
       </CardHeader>
-      <div className="empty-state">
-        <p className="empty-state__body">Loading…</p>
-      </div>
+      <Stack>
+        <Skeleton variant="line" />
+        <Skeleton variant="line" />
+        <Skeleton variant="line" />
+      </Stack>
     </Card>
   );
 }

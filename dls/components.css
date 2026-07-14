@@ -7,6 +7,10 @@
    these do not cover, add a new primitive here following the
    same naming, do not inline one-off styles in the app.
 
+   Motion is part of the contract too: components animate using the
+   duration/easing tokens, and ALL of it collapses to nothing under
+   prefers-reduced-motion (see the bottom of this file).
+
    Naming: mrdn-<block>__<element> --<modifier>  (BEM-ish)
    ============================================================ */
 
@@ -17,7 +21,31 @@
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-1);
   padding: var(--space-5);
+  /* Entrance (opacity by default; see the rise override below) and smooth
+     hover + theme transitions. Entrance uses the `translate` property so it
+     never clobbers the `transform`-based hover lift. */
+  animation: mrdn-fade var(--dur-slow) var(--ease-out) both;
+  transition: transform var(--dur) var(--ease-out),
+    box-shadow var(--dur) var(--ease-out),
+    background-color var(--dur) var(--ease-out),
+    border-color var(--dur) var(--ease-out);
 }
+.mrdn-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-2);
+}
+/* Every card except the account-summary cards gets a gentle rise on entrance.
+   Account cards fade only (no layout-shifting transform) so the responsive
+   behaviour contract can measure their position reliably. */
+.mrdn-card:not(.account-card) {
+  animation-name: mrdn-rise;
+}
+/* Light stagger for the dashboard grid (first child is the account strip). */
+.mrdn-grid > :nth-child(2) .mrdn-card { animation-delay: 60ms; }
+.mrdn-grid > :nth-child(3) .mrdn-card { animation-delay: 120ms; }
+.mrdn-grid > :nth-child(4) .mrdn-card { animation-delay: 180ms; }
+.mrdn-grid > :nth-child(5) .mrdn-card { animation-delay: 240ms; }
+
 .mrdn-card__header {
   display: flex;
   align-items: center;
@@ -79,23 +107,29 @@
   cursor: pointer;
   transition: background var(--dur-fast) var(--ease-out),
     border-color var(--dur-fast) var(--ease-out),
+    box-shadow var(--dur-fast) var(--ease-out),
     transform var(--dur-fast) var(--ease-out);
 }
 .mrdn-btn:focus-visible {
   outline: 3px solid var(--color-primary-tint);
   outline-offset: 2px;
 }
-.mrdn-btn:active { transform: translateY(1px); }
+.mrdn-btn:not(:disabled):hover { transform: translateY(-1px); }
+.mrdn-btn:not(:disabled):active { transform: translateY(0); }
+.mrdn-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 .mrdn-btn--primary { background: var(--color-primary); color: #fff; }
-.mrdn-btn--primary:hover { background: var(--color-primary-strong); }
+.mrdn-btn--primary:not(:disabled):hover {
+  background: var(--color-primary-strong);
+  box-shadow: var(--shadow-2);
+}
 .mrdn-btn--secondary {
   background: var(--color-surface);
   color: var(--color-primary);
   border-color: var(--color-line);
 }
-.mrdn-btn--secondary:hover { border-color: var(--color-primary); }
+.mrdn-btn--secondary:not(:disabled):hover { border-color: var(--color-primary); }
 .mrdn-btn--ghost { background: transparent; color: var(--color-ink-soft); }
-.mrdn-btn--ghost:hover { background: var(--color-surface-sunken); }
+.mrdn-btn--ghost:not(:disabled):hover { background: var(--color-surface-sunken); }
 .mrdn-btn--block { width: 100%; }
 
 /* ---- Pill: compact status label ---- */
@@ -109,6 +143,8 @@
   border-radius: var(--radius-pill);
   background: var(--color-surface-sunken);
   color: var(--color-ink-soft);
+  transition: background-color var(--dur) var(--ease-out),
+    color var(--dur) var(--ease-out);
 }
 .mrdn-pill--positive { background: var(--color-positive-tint); color: var(--color-positive); }
 .mrdn-pill--negative { background: var(--color-negative-tint); color: var(--color-negative); }
@@ -120,10 +156,14 @@
   display: flex;
   align-items: center;
   gap: var(--space-4);
-  padding: var(--space-3) 0;
+  padding: var(--space-3) var(--space-2);
+  margin: 0 calc(-1 * var(--space-2));
+  border-radius: var(--radius-sm);
   border-bottom: 1px solid var(--color-line);
+  transition: background-color var(--dur-fast) var(--ease-out);
 }
 .mrdn-row:last-child { border-bottom: none; }
+.mrdn-list .mrdn-row:hover { background: var(--color-surface-sunken); }
 .mrdn-row__icon {
   flex: none;
   width: 40px;
@@ -159,9 +199,13 @@
   background: var(--color-surface);
   color: var(--color-ink-soft);
   cursor: pointer;
-  transition: all var(--dur-fast) var(--ease-out);
+  transition: background-color var(--dur-fast) var(--ease-out),
+    border-color var(--dur-fast) var(--ease-out),
+    color var(--dur-fast) var(--ease-out),
+    transform var(--dur-fast) var(--ease-out);
 }
 .mrdn-chip:hover { border-color: var(--color-primary); }
+.mrdn-chip:active { transform: scale(0.97); }
 .mrdn-chip.is-active {
   background: var(--color-primary);
   border-color: var(--color-primary);
@@ -176,10 +220,21 @@
   overflow: hidden;
 }
 .mrdn-progress__fill {
+  position: relative;
   height: 100%;
   background: var(--color-accent);
   border-radius: inherit;
+  overflow: hidden;
   transition: width var(--dur-slow) var(--ease-out);
+}
+/* A slow light sheen sweeps across the fill so a goal in progress feels alive. */
+.mrdn-progress__fill::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, var(--color-glow), transparent);
+  translate: -100% 0;
+  animation: mrdn-sheen 2.6s var(--ease-in-out) infinite;
 }
 
 /* ---- Avatar ---- */
@@ -193,6 +248,27 @@
   align-items: center;
   justify-content: center;
   font-weight: var(--weight-semibold);
+}
+
+/* ---- Skeleton: shimmering loading placeholder ---- */
+.mrdn-skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--color-surface-sunken) 25%,
+    var(--color-line) 37%,
+    var(--color-surface-sunken) 63%
+  );
+  background-size: 400% 100%;
+  border-radius: var(--radius-sm);
+  animation: mrdn-shimmer 1.4s var(--ease-in-out) infinite;
+}
+.mrdn-skeleton--line { height: var(--text-base); }
+.mrdn-skeleton--title { height: var(--text-lg); width: 40%; }
+.mrdn-skeleton--stat { height: var(--text-2xl); width: 60%; }
+.mrdn-skeleton--pill {
+  height: var(--space-5);
+  width: var(--space-8);
+  border-radius: var(--radius-pill);
 }
 
 /* ---- Layout primitives ---- */
@@ -227,4 +303,41 @@
 @media (max-width: 640px) {
   .mrdn-grid { grid-template-columns: 1fr; }
   [class*="mrdn-col-"] { grid-column: 1 / -1; }
+}
+
+/* ============================================================
+   MOTION: keyframes
+   ============================================================ */
+@keyframes mrdn-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes mrdn-rise {
+  from { opacity: 0; translate: 0 10px; }
+  to { opacity: 1; translate: 0 0; }
+}
+@keyframes mrdn-sheen {
+  from { translate: -100% 0; }
+  to { translate: 220% 0; }
+}
+@keyframes mrdn-shimmer {
+  from { background-position: 100% 0; }
+  to { background-position: 0 0; }
+}
+
+/* ============================================================
+   MOTION: accessibility
+   Anyone who asks the OS to reduce motion gets a still UI. This is
+   required (see CLAUDE.md). Entrance animations snap to their end
+   state; looping sheen/shimmer stop; hover transitions are instant.
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
 }

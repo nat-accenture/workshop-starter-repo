@@ -27,13 +27,22 @@ sign-off first. When in doubt, reuse an existing token or component, or ask.
 
 1. **Use tokens, never raw values.** No hard-coded hex colours, pixel spacing, radii, or font sizes in app code. Use the CSS variables in `tokens.css` (for example `var(--color-primary)`, `var(--space-4)`). Change a design decision once, in tokens, and it changes everywhere.
 
-2. **Compose from `mrdn-` components.** Build screens out of the primitives in `components.css` (`mrdn-card`, `mrdn-stat`, `mrdn-btn`, `mrdn-row`, `mrdn-chip`, `mrdn-progress`, and the layout helpers `mrdn-grid` / `mrdn-stack` / `mrdn-cluster`). If a primitive is missing, do not add it silently: propose it in `components.css` following the same `mrdn-` naming and get explicit human sign-off first (this is a DLS change, see Rule 0). Do not scatter one-off styles through the app.
+2. **Compose from `mrdn-` components.** Build screens out of the primitives in `components.css` (`mrdn-card`, `mrdn-stat`, `mrdn-amount`, `mrdn-btn`, `mrdn-pill`, `mrdn-chip`, `mrdn-row`, `mrdn-progress`, `mrdn-avatar`, `mrdn-skeleton`, and the layout helpers `mrdn-grid` / `mrdn-stack` / `mrdn-cluster`). If a primitive is missing, do not add it silently: propose it in `components.css` following the same `mrdn-` naming and get explicit human sign-off first (this is a DLS change, see Rule 0). Do not scatter one-off styles through the app.
 
 3. **Money formatting.** All amounts are SGD, formatted with `en-SG` (`$1,240.50`). Use `.mrdn-amount` so figures are tabular and align. Credits (money in) use `.is-credit` (green). Ordinary debits stay neutral ink with a leading minus. Only use `.is-over` (red) for a figure that has breached a limit or budget.
 
-4. **Accessibility is not optional.** Keep visible `:focus-visible` rings, interactive targets at least 44px, semantic HTML (`button`, `nav`, `main`, `section`), and text alternatives for icons. Meridian is a bank; this is table stakes.
+4. **Accessibility is not optional.** Keep visible `:focus-visible` rings, interactive targets at least 44px, semantic HTML (`button`, `nav`, `main`, `section`), text alternatives for icons, and AA text contrast. Honour `prefers-reduced-motion` (see rule 6). Meridian is a bank; this is table stakes.
 
 5. **Mobile first, and it must pass the test.** The dashboard grid collapses to a single column at 640px and below. This is not a preference, it is enforced by the behaviour contract in `../tests/responsive.spec.js`, which runs at mobile, tablet, and desktop widths during verify.
+
+6. **Motion is tokenised, purposeful, and optional.** Animate with the duration and easing tokens (`--dur*`, `--ease*`), never magic timings. Motion should reinforce meaning (a figure counting up, a bar filling, a card settling in, a shimmer while loading), not decorate. All of it MUST collapse under `prefers-reduced-motion: reduce` (a global reset lives at the bottom of `components.css`; JS animations check the `prefersReducedMotion()` helper). Keep entrance/transform animation off anything the behaviour contract measures (the account-summary cards fade only).
+
+## The palette
+Meridian's palette is deliberately lean ("Graphite & Indigo"): one indigo action
+colour (`--color-primary`), a deep teal for savings and goals (`--color-accent`),
+the two money semantics (`--color-positive` / `--color-negative`), and a cool
+neutral ink + surface scale. Fewer hues read as more premium and keep money
+meaning unambiguous. Adding a new hue is a Rule 0 change, so ask first.
 
 ## See the system
 Two galleries render the DLS:

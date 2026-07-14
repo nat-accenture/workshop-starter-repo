@@ -1,6 +1,7 @@
-import { Card, CardHeader, CardTitle, Pill, Stat } from "../../dls";
+import { Card, CardHeader, Pill, Skeleton, Stack, Stat } from "../../dls";
 import { formatSGD } from "../../../data/api";
 import type { Account } from "../../../data/types";
+import { useCountUp } from "../../hooks/useCountUp";
 
 // Balance summary (PRE-BUILT in the original). Renders the account strip that
 // the behaviour contract asserts on: #accounts > .account-card x3.
@@ -26,22 +27,31 @@ function AccountCard({ account }: { account: Account }) {
       </div>
       <Stat
         label={account.accountNumberMasked}
-        value={formatSGD(account.balanceMinor)}
+        value={<AnimatedBalance minor={account.balanceMinor} />}
       />
     </div>
   );
 }
 
-// Keeps the same markers off the critical path while data loads.
+// Counts the balance up on load; lands exactly on the true figure.
+function AnimatedBalance({ minor }: { minor: number }) {
+  const current = useCountUp(minor);
+  return <>{formatSGD(Math.round(current))}</>;
+}
+
+// Shimmering placeholder while balances load.
 export function BalancesSkeleton() {
   return (
     <div className="account-strip">
       {[0, 1, 2].map((i) => (
         <Card key={i}>
           <CardHeader>
-            <CardTitle>Loading…</CardTitle>
+            <Skeleton variant="title" />
           </CardHeader>
-          <div className="empty-state" style={{ minHeight: "var(--space-8)" }} />
+          <Stack>
+            <Skeleton variant="line" />
+            <Skeleton variant="stat" />
+          </Stack>
         </Card>
       ))}
     </div>

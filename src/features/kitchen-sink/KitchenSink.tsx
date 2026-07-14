@@ -18,6 +18,7 @@ import {
   RowEnd,
   RowIcon,
   SectionTitle,
+  Skeleton,
   Stack,
   Stat,
 } from "../../dls";
@@ -37,8 +38,6 @@ const COLOR_TOKENS = [
   "--color-positive-tint",
   "--color-negative",
   "--color-negative-tint",
-  "--color-warning",
-  "--color-warning-tint",
   "--color-accent",
   "--color-accent-tint",
   "--color-ink",
@@ -283,6 +282,26 @@ export function KitchenSink() {
             </Card>
           </Col>
         </Grid>
+      </section>
+
+      <section className="ks-section">
+        <SectionTitle>Loading skeletons</SectionTitle>
+        <p className="ks-note">
+          Shimmering placeholders shown while data loads. Motion respects
+          <code> prefers-reduced-motion</code>.
+        </p>
+        <div style={{ maxWidth: "24rem" }}>
+          <Card>
+            <CardHeader>
+              <Skeleton variant="title" />
+            </CardHeader>
+            <Stack>
+              <Skeleton variant="line" />
+              <Skeleton variant="stat" />
+              <Skeleton variant="line" />
+            </Stack>
+          </Card>
+        </div>
       </section>
 
       <section className="ks-section">
