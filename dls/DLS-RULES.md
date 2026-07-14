@@ -38,6 +38,6 @@ sign-off first. When in doubt, reuse an existing token or component, or ask.
 ## See the system
 Two galleries render the DLS:
 - `preview.html`: the static token + component reference (just double-click it).
-- `../kitchen-sink.html`: the **live** gallery. It reads the computed token values at runtime and updates when you switch theme. Use the moon/sun toggle in the header to check light and dark.
+- the `/kitchen-sink` route (`../src/features/kitchen-sink/KitchenSink.tsx`): the **live** gallery. It reads the computed token values at runtime and updates when you switch theme. Use the moon/sun toggle in the header to check light and dark.
 
-Theming is wired by `../theme.js`, which sets a `[data-theme]` attribute on `<html>`. Light and dark are token overrides only (see `tokens.css`); components follow automatically.
+Theming is wired by `../src/theme/ThemeProvider.tsx`, which sets a `[data-theme]` attribute on `<html>`. Light and dark are token overrides only (see `tokens.css`); components follow automatically.

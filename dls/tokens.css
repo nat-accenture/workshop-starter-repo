@@ -93,7 +93,7 @@
    Dark mode is expressed ONLY as overrides of the token names
    above. Components read tokens, so every one of them follows
    automatically, with no component CSS changes and no per-page styling.
-   Activated by setting [data-theme="dark"] on <html> (see theme.js).
+   Activated by setting [data-theme="dark"] on <html> (see src/theme/ThemeProvider.tsx).
    ============================================================ */
 [data-theme="dark"] {
   color-scheme: dark;
