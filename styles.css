@@ -43,6 +43,14 @@ body {
 .app-bar__right { display: inline-flex; align-items: center; gap: var(--space-3); }
 .app-greeting { font-size: var(--text-base); font-weight: var(--weight-medium); color: var(--color-ink-soft); }
 
+/* On small screens the app bar tightens: hide the greeting (the avatar still
+   identifies the user) and collapse the nav links to their icons so nothing
+   wraps or clips. The links stay reachable and accessible via aria-label. */
+@media (max-width: 640px) {
+  .app-greeting { display: none; }
+  .app-bar__label { display: none; }
+}
+
 /* Dashboard canvas */
 .dashboard {
   max-width: 1120px;
@@ -75,7 +83,7 @@ body {
   align-items: center;
   justify-content: center;
   gap: var(--space-1);
-  min-height: 148px;
+  min-height: 148px; /* placeholder card height: intentional layout scaffolding, not a token */
   padding: var(--space-5);
   text-align: center;
   border: 1px dashed var(--color-line);

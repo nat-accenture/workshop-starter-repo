@@ -35,6 +35,11 @@ You never fight the details, because the app carries its own rules and the assis
 - `data/` a mock API (JSON shaped like a real bank). Your widgets show real-looking data.
 - `tests/` a responsive test (Playwright). Your widgets must work on mobile, tablet, and desktop.
 
+### See the design system and switch themes
+- Open the **Kitchen sink** link in the header (or `kitchen-sink.html`) for a live gallery of every token and component. The colour swatches show the real token values and update when you change theme.
+- Use the **moon/sun toggle** in the header to switch light and dark. Dark mode is only token overrides, so every widget follows automatically.
+- The DLS is mandatory (see `CLAUDE.md` Rule 0 and `dls/DLS-RULES.md`): the assistant builds only from DLS tokens and `mrdn-` components, and stops to ask before changing the design system itself.
+
 ## The loop you will run
 1. discuss  (say what you want)
 2. plan     (it proposes an approach, you approve)

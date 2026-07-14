@@ -11,6 +11,8 @@
    ============================================================ */
 
 :root {
+  color-scheme: light;
+
   /* ---- Brand + action colours ---- */
   --color-brand: #0A2540;          /* deep navy: header, brand ink */
   --color-primary: #1657E0;        /* the one action blue */
@@ -86,6 +88,45 @@
   --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
-/* Dark mode is a deliberate future extension. When it lands it
-   overrides these same token names inside a [data-theme="dark"]
-   block, and every component follows automatically. */
+/* ============================================================
+   DARK THEME
+   Dark mode is expressed ONLY as overrides of the token names
+   above. Components read tokens, so every one of them follows
+   automatically, with no component CSS changes and no per-page styling.
+   Activated by setting [data-theme="dark"] on <html> (see theme.js).
+   ============================================================ */
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  /* ---- Brand + action colours ---- */
+  --color-brand: #5E8BEF;          /* lighter brand blue: reads on dark surfaces */
+  --color-primary: #2F66DE;        /* action blue: white button text stays AA (~5:1) */
+  --color-primary-strong: #4C7CE8; /* hover / pressed */
+  --color-primary-tint: #DCE6FB;   /* kept light so focus rings + avatars stay visible */
+
+  /* ---- Money + status semantics ---- */
+  --color-positive: #3ECB84;       /* money in, credits, on track */
+  --color-positive-tint: #123020;
+  --color-negative: #F27A62;       /* money out warnings, over budget */
+  --color-negative-tint: #351811;
+  --color-warning: #E0A64B;
+  --color-warning-tint: #33260F;
+  --color-accent: #35B9CE;         /* teal: savings + goals */
+  --color-accent-tint: #0E2C33;
+
+  /* ---- Text ---- */
+  --color-ink: #EAF0F8;            /* primary text */
+  --color-ink-soft: #B4C0D4;       /* secondary text */
+  --color-muted: #8593AB;          /* labels, captions */
+
+  /* ---- Surfaces + lines ---- */
+  --color-surface: #141E30;        /* cards (raised above canvas) */
+  --color-surface-sunken: #0E1826; /* inset areas, icon wells */
+  --color-canvas: #0B1220;         /* page background (darkest) */
+  --color-line: #26344A;           /* borders, dividers */
+
+  /* ---- Elevation (black-based so depth reads on a dark canvas) ---- */
+  --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-2: 0 4px 16px rgba(0, 0, 0, 0.45);
+  --shadow-3: 0 12px 32px rgba(0, 0, 0, 0.5);
+}

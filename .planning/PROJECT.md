@@ -22,6 +22,7 @@ The app layer of a deliberately layered demo, built with SpectrumOS. Participant
 - Readable. A non-engineer should be able to follow what changed.
 - Use the contracts: tokens not raw values, the API shape not ad hoc data, and it must pass the responsive test.
 - Small, atomic changes, each verified against the request.
+- **DLS is mandatory (Rule 0).** Every change is built from `dls/` tokens and `mrdn-` components. Changing the DLS itself, or deviating from it (raw values, one-off styles), is a breaking change that must stop and get explicit human confirmation. See `CLAUDE.md` and `dls/DLS-RULES.md`.
 
 ## Out of scope for the workshop
 - Real backend, auth, payments, deployment.
