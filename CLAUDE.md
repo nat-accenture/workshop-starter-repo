@@ -58,6 +58,72 @@ Treat Rule 0 as a hard gate in the `/spec-*` loop:
 
 ---
 
+## RULE 1: `/spec-sketch` runs in `prototype/` and is built from the DLS
+
+This rule governs `/spec-sketch` and any throwaway UI mockup or prototype made
+in this repo. It **overrides the sketch skill's defaults** and is enforced as
+part of Rule 0. It holds in **every** mode: idea, frontier, `--quick`, `--text`,
+and `--wrap-up`. Because `--quick` and frontier mode both skip straight to the
+skill's `build_sketches` step, anchor this rule there: the `prototype/` location
+and the DLS gate below apply at build time no matter how the run got there.
+
+1. **All prototype work lives in a top-level `prototype/` folder.**
+   Wherever the sketch skill (in any mode) would create, list, link, read, or
+   write under `.planning/sketches/`, use `prototype/` instead. Create
+   `prototype/` if it is missing. Concretely:
+   - Sketch directories `prototype/NNN-descriptive-name/index.html` (each with
+     its `README.md`); the manifest at `prototype/MANIFEST.md`; the wrap-up
+     summary at `prototype/WRAP-UP-SUMMARY.md`.
+   - Frontier mode and `--wrap-up` **read** from `prototype/`
+     (`prototype/MANIFEST.md`, glob `prototype/*/README.md`); their
+     "nothing to analyze" / "no sketches found" guards check `prototype/`.
+   - Commit `--files` paths point at `prototype/...`.
+   - Exception: the `--wrap-up` findings skill stays where the skill puts it
+     (`./.claude/skills/sketch-findings-*/`). Only sketch artifacts move to
+     `prototype/`.
+
+2. **Every prototype is built from the DLS. No bespoke theme, no theme switcher.**
+   - Each prototype's HTML links the real design contract at the correct
+     relative depth. A sketch at `prototype/NNN-name/index.html` is two levels
+     below the repo root, so link:
+     `<link rel="stylesheet" href="../../dls/tokens.css">` then
+     `<link rel="stylesheet" href="../../dls/components.css">`. This replaces the
+     skill's `../themes/default.css` link. Compose the prototyped UI only from
+     the `mrdn-` components (`mrdn-card`, `mrdn-stat`, `mrdn-btn`, `mrdn-row`,
+     `mrdn-pill`, `mrdn-chip`, `mrdn-progress`, `mrdn-avatar`, and the layout
+     helpers `mrdn-grid` / `mrdn-stack` / `mrdn-cluster`) and DLS tokens; do not
+     hand-roll bespoke non-`mrdn-` elements for what the DLS already covers.
+   - **Skip the skill's `create_theme` step.** Do not generate
+     `prototype/themes/default.css` or any separate palette / type / spacing /
+     shape system, and do not turn a "mood" into new design values.
+   - **Do not use the skill's file-swapping theme switcher** and do not author
+     extra theme files (e.g. `midnight.css`, `brutalist.css`). Light and dark
+     are `[data-theme="dark"]` token overrides already defined in
+     `dls/tokens.css`; a prototype toggles theme by setting `data-theme` on
+     `<html>`, never by swapping stylesheets. Use the DLS token names
+     (`--color-brand`, `--color-ink`, `--color-canvas`, `--space-*`, …), never
+     the skill template's names (`--color-bg`, `--color-text`).
+   - No raw hex / rgb / px / rem literals and no one-off inline styles for
+     anything the tokens cover: being throwaway does **not** exempt a prototype
+     from Rule 0.
+   - Prototypes stay plain HTML linking the raw DLS CSS; they do **not** need the
+     React `src/dls/` wrappers. This binds the prototyped UI only: the injected
+     sketch harness (toolbar, variant tabs) is exempt.
+
+3. **If the DLS is missing, or a prototype needs something it does not cover,
+   STOP and ask.**
+   - Before building (in every mode, including `--quick`), verify that
+     `dls/tokens.css` and `dls/components.css` exist. If `dls/` cannot be found,
+     do not invent one and do not fall back to a generated theme: pause and ask
+     the user how to proceed.
+   - If a prototype appears to need a token or `mrdn-` component the DLS does not
+     have (i.e. it would require creating or changing the DLS), that is a Rule 0
+     breaking change: stop, say what is missing, and get explicit human
+     confirmation before adding anything. Prefer an existing token or component;
+     when none fits, ask.
+
+---
+
 ## Other standing rules
 - **Money:** SGD, `en-SG`, stored in minor units. Format with `formatSGD()` from
   `data/api.ts`; never divide-and-concatenate by hand. Use `.mrdn-amount`
