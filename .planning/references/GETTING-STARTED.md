@@ -65,7 +65,7 @@ Meridian has two routes, both served by the single-page shell:
 
 ### Switching theme
 
-Use the **moon / sun toggle** in the header to switch between light and dark mode. Your choice is remembered across visits (stored in the browser under `meridian-theme`) and applied before the page paints, so there is no flash of the wrong mode. Before you have chosen, the app follows your operating system's light / dark setting. For the full mechanism, see [docs/CONFIGURATION.md](CONFIGURATION.md).
+Use the **moon / sun toggle** in the header to switch between light and dark mode. Your choice is remembered across visits (stored in the browser under `meridian-theme`) and applied before the page paints, so there is no flash of the wrong mode. Before you have chosen, the app follows your operating system's light / dark setting. For the full mechanism, see [CONFIGURATION.md](CONFIGURATION.md).
 
 ## Make your first change
 
@@ -119,5 +119,5 @@ The test builds the app and serves it on port 5173, so **stop the dev server fir
 ## Next steps
 
 - **[README.md](../../README.md)** project overview, scripts, and the three-contract model (design, data, behaviour).
-- **[docs/ARCHITECTURE.md](ARCHITECTURE.md)** how the app is structured and how the pieces fit together.
-- **[docs/CONFIGURATION.md](CONFIGURATION.md)** build/tooling config and the theme mechanism in detail.
+- **[ARCHITECTURE.md](ARCHITECTURE.md)** how the app is structured and how the pieces fit together.
+- **[CONFIGURATION.md](CONFIGURATION.md)** build/tooling config and the theme mechanism in detail.

@@ -40,7 +40,7 @@ environment file to configure before it runs.
 
 There is nothing to copy or set up beyond this. The data layer reads JSON
 fixtures in `data/` behind a small simulated latency, so the app works offline
-straight after install. See [docs/CONFIGURATION.md](./CONFIGURATION.md) for the
+straight after install. See [CONFIGURATION.md](./CONFIGURATION.md) for the
 few build-time settings that do exist.
 
 ## Build commands
@@ -190,6 +190,6 @@ documented, follow these guidelines when opening a pull request:
 ## Next steps
 
 - [README.md](../../README.md) for the project overview and quick start.
-- [docs/ARCHITECTURE.md](./ARCHITECTURE.md) for how the pieces fit together.
-- [docs/CONFIGURATION.md](./CONFIGURATION.md) for build-time settings.
+- [ARCHITECTURE.md](./ARCHITECTURE.md) for how the pieces fit together.
+- [CONFIGURATION.md](./CONFIGURATION.md) for build-time settings.
 - `dls/DLS-RULES.md` for the full design contract.
