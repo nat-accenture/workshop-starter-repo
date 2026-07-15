@@ -118,6 +118,6 @@ The test builds the app and serves it on port 5173, so **stop the dev server fir
 
 ## Next steps
 
-- **[README.md](../README.md)** project overview, scripts, and the three-contract model (design, data, behaviour).
+- **[README.md](../../README.md)** project overview, scripts, and the three-contract model (design, data, behaviour).
 - **[docs/ARCHITECTURE.md](ARCHITECTURE.md)** how the app is structured and how the pieces fit together.
 - **[docs/CONFIGURATION.md](CONFIGURATION.md)** build/tooling config and the theme mechanism in detail.

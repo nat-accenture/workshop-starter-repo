@@ -189,7 +189,7 @@ documented, follow these guidelines when opening a pull request:
 
 ## Next steps
 
-- [README.md](../README.md) for the project overview and quick start.
+- [README.md](../../README.md) for the project overview and quick start.
 - [docs/ARCHITECTURE.md](./ARCHITECTURE.md) for how the pieces fit together.
 - [docs/CONFIGURATION.md](./CONFIGURATION.md) for build-time settings.
 - `dls/DLS-RULES.md` for the full design contract.
