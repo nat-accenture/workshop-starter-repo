@@ -165,3 +165,22 @@ a { color: inherit; }
     transparent 70%
   );
 }
+
+.gradient-bg--breathing {
+  /* Touch / no-fine-pointer fallback: gentle opacity pulse, centred (no tracking).
+     The DLS prefers-reduced-motion reset (components.css ~335) kills this keyframe
+     automatically -- no extra @media block needed here. */
+  background: radial-gradient(
+    ellipse 80% 60% at 50% 50%,
+    color-mix(in srgb, var(--color-brand) 12%, transparent),
+    color-mix(in srgb, var(--color-surface) 6%, transparent) 45%,
+    transparent 70%
+  );
+  animation: gradient-breathe var(--dur-breath) var(--ease-in-out) infinite alternate;
+  will-change: opacity;   /* opacity is compositor-only; safe to hint */
+}
+
+@keyframes gradient-breathe {
+  from { opacity: 0.4; }
+  to   { opacity: 1; }
+}
