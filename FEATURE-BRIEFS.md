@@ -25,7 +25,7 @@ The three hooks below are the heart of the dashboard. They are implemented as
 ## 1. Recent activity  (1 star)
 > "On my dashboard, show my recent activity: a list of my latest transactions, each with the merchant, the category, the date, and the amount. Money coming in should read as positive, money going out as negative."
 
-- Fills: the "Recent activity" card (`#transactions`)
+- Fills: the "Recent activity" card (`src/features/dashboard/RecentActivity.tsx`)
 - Data: `getTransactions()` (use `getCategories()` for the category label)
 - Components: `mrdn-list`, `mrdn-row`, `mrdn-amount`
 - Done when: the card lists recent transactions with merchant, category, date, and a signed amount, and still reads well on a phone.
@@ -33,7 +33,7 @@ The three hooks below are the heart of the dashboard. They are implemented as
 ## 2. Spend by category  (2 stars)
 > "Show me where my money went this month. Group my spending into categories, show the total for each, and give each a little bar so I can see the biggest at a glance. Do not count income or transfers."
 
-- Fills: the "Spend by category" card (`#spend`)
+- Fills: the "Spend by category" card (`src/features/dashboard/SpendByCategory.tsx`)
 - Data: `getTransactions()` + `getCategories()` where `isSpending` is true
 - Components: `mrdn-row`, `mrdn-progress`, `mrdn-amount`
 - Done when: each spending category shows its total and a proportional bar, biggest first.
@@ -41,7 +41,7 @@ The three hooks below are the heart of the dashboard. They are implemented as
 ## 3. Savings goal  (2 stars)
 > "Show my progress toward my Holiday fund. Tell me how much I have saved of my target and how much is left, with a progress bar so I can feel how close I am."
 
-- Fills: the "Savings goal" card (`#savings`)
+- Fills: the "Savings goal" card (`src/features/dashboard/SavingsGoal.tsx`)
 - Data: the savings account from `getAccounts()` (it has `goal.targetMinor`)
 - Components: `mrdn-stat`, `mrdn-progress`, `mrdn-pill--accent`
 - Done when: it shows saved of target and a progress bar toward the goal.

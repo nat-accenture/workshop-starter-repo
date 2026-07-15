@@ -1,79 +1,99 @@
-# Meridian | SpectrumOS workshop starter
+<!-- generated-by: spec-doc-writer -->
+# Meridian Dashboard
 
-Welcome. This is Meridian, a small, safe demo banking dashboard. During the workshop you will add real widgets to it, not by writing code yourself, but by describing what you want to SpectrumOS and driving the loop.
+Meridian Bank customer dashboard: a React + TypeScript single-page app built on the Meridian Design Language System (DLS).
 
-## What you need (should already be done before today)
-- Claude Code installed (`claude --version` returns a version).
-- SpectrumOS installed (`/spec-progress` responds inside Claude Code).
-- This repo cloned.
-- Node.js installed (`node -v` returns a version), used to run the tooling and preview the app.
+## Installation
 
-If any of those do not work, tell a facilitator now. Do not spend the session fighting setup.
+Requires [Node.js](https://nodejs.org) (used to run Vite and the tooling) and npm. Install dependencies from the project root:
 
-## Install SpectrumOS (bundled)
-SpectrumOS ships with this repo, in `vendor/`. From this folder, install it once:
-```
-npm install -g ./vendor/spectrum-os-2.0.3.tgz
-spectrum-os
-```
-The second command wires the `/spec-*` commands into Claude Code. Confirm with `/spec-progress`.
-
-## Run the app locally
-Meridian is a React + TypeScript app built with Vite. From the `starter-repo` folder, install once, then start the dev server:
-```
+```bash
 npm install
-npm run dev
 ```
-Open the address it prints (for example http://localhost:5173). You will see the Meridian dashboard: balances, recent activity, spend by category, savings goal, and quick actions. Vite hot-reloads, so the tab updates as the code changes.
 
-To preview the production build instead:
-```
+## Quick start
+
+1. Install dependencies: `npm install`
+2. Start the dev server: `npm run dev`
+3. Open the address Vite prints (for example http://localhost:5173).
+
+You will see the Meridian dashboard: account balances, recent activity, spend by category, a savings goal, and quick actions. Vite hot-reloads, so the tab updates as the code changes.
+
+To preview a production build instead:
+
+```bash
 npm run build
-npm run preview   # also on http://localhost:5173
+npm run preview   # serves the built app on http://localhost:5173
 ```
 
-## How the app is built (three contracts)
-The app is a thin React shell over three contracts, and the assistant follows all three:
-- `dls/` the design system (tokens + components). React components are thin wrappers that emit the `mrdn-` markup, so widgets come out on brand.
-- `data/` a mock API in `data/api.ts` (typed, JSON shaped like a real bank). Widgets show real-looking data; swap the seam for a live backend later.
-- `tests/` a responsive test (Playwright). Widgets must work on mobile, tablet, and desktop.
+## Usage
 
-### See the design system and switch themes
-- Open the **Kitchen sink** link in the header (the `/kitchen-sink` route) for a live gallery of every token and component. The colour swatches show the real token values and update when you change theme.
-- Use the **moon/sun toggle** in the header to switch light and dark. Dark mode is only token overrides, so every widget follows automatically.
-- The DLS is mandatory (see `CLAUDE.md` Rule 0 and `dls/DLS-RULES.md`): the assistant builds only from DLS tokens and `mrdn-` components, and stops to ask before changing the design system itself.
+The app is a thin React shell over three contracts, and every widget is built from them:
 
-## The loop you will run
-1. discuss  (say what you want)
-2. plan     (it proposes an approach, you approve)
-3. execute  (it builds and commits)
-4. verify   (it checks the work, including the responsive test)
+- **`dls/`** the design system (`tokens.css` + `components.css`). React components in `src/dls/` are thin wrappers (`Card`, `Stat`, `Amount`, `Button`, `Grid`, `Stack`, and more) that emit the `mrdn-` markup, so widgets come out on brand. The DLS is the single source of truth for every colour, spacing, radius, type, and motion value. See `dls/DLS-RULES.md`.
+- **`data/`** a mock API in `data/api.ts` (typed, JSON shaped like a real bank). It exposes `getAccounts()`, `getTransactions()`, `getCategories()`, and the money helper `formatSGD()`. Each call returns a local JSON fixture behind a small fake latency, so it behaves like a real network request. See `data/DATA-CONTRACT.md`.
+- **`tests/`** a Playwright responsive behaviour contract. The dashboard must work at mobile, tablet, and desktop sizes.
 
-## Your mission today
-The three core widgets (recent activity, spend by category, savings goal) now ship **built** in `src/features/dashboard/`, as a working reference. To practise the SpectrumOS loop, extend the app with a stretch brief:
-1. Open `FEATURE-BRIEFS.md` and pick a **Stretch** brief (filter, income vs spend, account switcher).
-2. Start Claude Code: `claude`.
-3. `/spec-progress` to see where the project is.
-4. `/spec-quick "the brief you picked"`.
-5. Read the plan. Approve it.
-6. The dev server hot-reloads. See your change live.
-7. `/spec-verify-work` and answer its questions.
-8. `git log --oneline` to see the clean commit and the trail in `.planning/`.
+### Routes
 
-You just shipped software by describing an experience.
+The app has two routes, both served by the single-page shell:
 
-## Run the responsive test (optional)
-The repo ships a Playwright responsive test, the behaviour contract. You do not need it for the workshop; the facilitator runs it in the demo. If you want to try it:
+- `/` the dashboard.
+- `/kitchen-sink` a live gallery of every DLS token and component. The colour swatches show the real token values.
+
+### Switch themes
+
+Use the moon/sun toggle in the header to switch between light and dark. Dark mode is expressed only as token overrides in `dls/tokens.css`, so every widget follows automatically. The chosen theme is remembered in `localStorage` and applied before first paint to avoid a flash of the wrong mode.
+
+### Format money
+
+Money is SGD, `en-SG`, stored in minor units (cents). Format it with `formatSGD()` from `data/api.ts` rather than dividing and concatenating by hand:
+
+```ts
+import { formatSGD } from "./data/api";
+
+formatSGD(125000);                 // "$1,250.00"
+formatSGD(-4200);                  // "-$42.00"
+formatSGD(4200, { signed: true }); // "+$42.00"
 ```
-npm install
+
+### Run the responsive test
+
+The Playwright suite builds the app, serves the production bundle, and checks it at phone (390x844), tablet (768x1024), and desktop (1280x800) widths in Chromium.
+
+```bash
 npx playwright install chromium
 npm run test:responsive
 ```
-It builds the app, serves it at phone, tablet, and desktop sizes, and checks each. (Stop the dev server first, since the test binds the same port 5173.)
 
-## Start over any time
-Everything is version controlled. To return to the clean starting point:
+The test binds port 5173, so stop the dev server first. View the last report with `npm run test:responsive:report`.
+
+## Scripts
+
+| Script | Description |
+| --- | --- |
+| `npm run dev` | Start the Vite dev server on port 5173 with hot reload. |
+| `npm run build` | Type-check with `tsc --noEmit`, then build the production bundle with Vite. |
+| `npm run preview` | Serve the production build on port 5173. |
+| `npm run test:responsive` | Run the Playwright responsive behaviour contract. |
+| `npm run test:responsive:report` | Open the last Playwright HTML report. |
+
+## Project structure
+
 ```
-git reset --hard baseline
+src/                 React app
+  App.tsx            Route definitions (/ and /kitchen-sink)
+  main.tsx           Entry point; loads DLS CSS, then mounts App
+  dls/               Thin React wrappers that emit mrdn- markup
+  components/        App chrome (AppBar, ThemeToggle, icons)
+  features/          Dashboard and kitchen-sink screens
+  hooks/             Data-loading hooks (useDashboardData)
+  theme/             ThemeProvider (light/dark)
+dls/                 Design contract: tokens.css, components.css, DLS-RULES.md
+data/                Data contract: api.ts, JSON fixtures, DATA-CONTRACT.md
+tests/               Behaviour contract: responsive.spec.js (Playwright)
 ```
-(Ask a facilitator first if you are not sure.)
+
+## License
+
+No license file is present, and the package is marked `private` in `package.json`. This project is not distributed under an open-source license.
