@@ -146,3 +146,22 @@ a { color: inherit; }
 .ks-elevation__card { background: var(--color-surface); border: 1px solid var(--color-line); border-radius: var(--radius-lg); padding: var(--space-5); color: var(--color-ink-soft); font-size: var(--text-sm); }
 
 .ks-cell { background: var(--color-surface-sunken); border: 1px solid var(--color-line); border-radius: var(--radius-md); padding: var(--space-4); text-align: center; color: var(--color-ink-soft); font-weight: var(--weight-semibold); font-size: var(--text-sm); }
+
+/* ============================================================
+   Gradient background
+   Ambient full-viewport layer. Colours resolve from existing DLS
+   tokens via color-mix() (Rule 0 clean: no new colour token, no raw
+   hex/rgb). Geometry %s are layout scaffolding, not design values.
+   ============================================================ */
+.gradient-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 1;             /* below .app-bar (z-index: 10) — never covers the header */
+  pointer-events: none;   /* never intercepts clicks / form input */
+  background: radial-gradient(
+    ellipse 80% 60% at var(--mx, 50%) var(--my, 50%),
+    color-mix(in srgb, var(--color-brand) 12%, transparent),
+    color-mix(in srgb, var(--color-surface) 6%, transparent) 45%,
+    transparent 70%
+  );
+}
