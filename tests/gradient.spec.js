@@ -67,3 +67,16 @@ test("gradient layer is static under reduced motion (D-09 scaffold)", async ({ p
   // passes trivially now and stays green after Plan 03 adds breathing.
   expect(parseFloat(dur)).toBeLessThan(1);
 });
+
+test("breathing fallback: present on touch, absent on fine pointer", async ({ page }, testInfo) => {
+  await page.goto("/");
+  const layer = page.locator('[data-testid="gradient-bg"]');
+  await expect(layer).toBeVisible();
+  if (testInfo.project.name === "mobile") {
+    // coarse pointer → breathing mode
+    await expect(layer).toHaveClass(/gradient-bg--breathing/);
+  } else {
+    // fine pointer → pointer-tracking mode, no breathing class
+    await expect(layer).not.toHaveClass(/gradient-bg--breathing/);
+  }
+});
