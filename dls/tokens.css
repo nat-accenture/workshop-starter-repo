@@ -9,39 +9,38 @@
    Change a token here and it changes everywhere at once. That is
    the point of a design system.
 
-   PALETTE: "Graphite & Indigo" - a restrained, professional
-   banking palette. One confident indigo action colour, a deep
-   teal for savings/goals, and the two money semantics (in / out).
-   Everything else is a cool neutral scale. Fewer hues, on purpose.
+   PALETTE: deliberately lean, inspired by classic Singapore retail
+   banking (a deep confident blue, used for brand AND actions AND
+   savings), plus the two money semantics (green in / red out) and a
+   cool neutral scale. Three hues, not five. Fewer colours read as
+   more trustworthy and keep money meaning unambiguous.
    ============================================================ */
 
 :root {
   color-scheme: light;
 
-  /* ---- Brand + action colours ---- */
-  --color-brand: #131A2B;          /* near-black indigo ink: header, brand */
-  --color-primary: #3355FF;        /* the one action indigo */
-  --color-primary-strong: #2440DB; /* hover / pressed */
-  --color-primary-tint: #ECEFFF;   /* soft fill, focus ring */
+  /* ---- Brand + action colours (one blue family) ---- */
+  --color-brand: #06356E;          /* deep navy blue: header, brand */
+  --color-primary: #0A4C99;        /* the one action blue */
+  --color-primary-strong: #073B79; /* hover / pressed */
+  --color-primary-tint: #E3ECF8;   /* soft fill, focus ring, savings */
 
-  /* ---- Money + status semantics ---- */
-  --color-positive: #0B7A4B;       /* money in, credits, on track */
-  --color-positive-tint: #E3F5EC;
-  --color-negative: #BC3423;       /* money out warnings, over budget */
-  --color-negative-tint: #FBE9E7;
-  --color-accent: #0B6F79;         /* deep teal: savings + goals */
-  --color-accent-tint: #E1F1F3;
+  /* ---- Money semantics (the only non-blue hues) ---- */
+  --color-positive: #147A4D;       /* money in, credits, on track */
+  --color-positive-tint: #E4F3EA;
+  --color-negative: #C4122E;       /* money out, over budget */
+  --color-negative-tint: #FBE7EA;
 
   /* ---- Text ---- */
-  --color-ink: #131A2B;            /* primary text */
-  --color-ink-soft: #47546B;       /* secondary text */
+  --color-ink: #16202E;            /* primary text */
+  --color-ink-soft: #46566B;       /* secondary text */
   --color-muted: #5C6579;          /* labels, captions (AA on canvas) */
 
   /* ---- Surfaces + lines ---- */
   --color-surface: #FFFFFF;        /* cards */
-  --color-surface-sunken: #F4F6FC; /* inset areas, icon wells */
-  --color-canvas: #EDF0F8;         /* page background */
-  --color-line: #E2E7F1;           /* borders, dividers */
+  --color-surface-sunken: #F3F6FB; /* inset areas, icon wells */
+  --color-canvas: #EDF1F7;         /* page background */
+  --color-line: #E1E7F0;           /* borders, dividers */
   --color-glow: rgba(255, 255, 255, 0.35); /* moving sheen on filled bars */
 
   /* ---- Spacing (4px base) ---- */
@@ -81,9 +80,9 @@
   --leading-normal: 1.5;
 
   /* ---- Elevation ---- */
-  --shadow-1: 0 1px 2px rgba(19, 26, 43, 0.06);
-  --shadow-2: 0 6px 20px rgba(19, 26, 43, 0.10);
-  --shadow-3: 0 16px 40px rgba(19, 26, 43, 0.16);
+  --shadow-1: 0 1px 2px rgba(6, 24, 46, 0.06);
+  --shadow-2: 0 6px 20px rgba(6, 24, 46, 0.10);
+  --shadow-3: 0 16px 40px rgba(6, 24, 46, 0.16);
   --shadow-focus: 0 0 0 3px var(--color-primary-tint);
 
   /* ---- Motion ----
@@ -111,18 +110,16 @@
   color-scheme: dark;
 
   /* ---- Brand + action colours ---- */
-  --color-brand: #7C9BFF;          /* lighter brand indigo: reads on dark surfaces */
-  --color-primary: #4463EC;        /* action indigo: white button text stays AA (4.95:1) */
-  --color-primary-strong: #3552D8; /* hover / pressed (deeper) */
-  --color-primary-tint: #E4E9FF;   /* kept light so focus rings + avatars stay visible */
+  --color-brand: #6FA8E8;          /* lighter brand blue: reads on dark surfaces */
+  --color-primary: #235FBF;        /* action blue: white button text stays AA (6:1) */
+  --color-primary-strong: #1B4C9E; /* hover / pressed (deeper) */
+  --color-primary-tint: #DCE7F8;   /* kept light so focus rings + avatars stay visible */
 
-  /* ---- Money + status semantics ---- */
-  --color-positive: #35CE86;       /* money in, credits, on track */
+  /* ---- Money semantics ---- */
+  --color-positive: #33C97F;       /* money in, credits, on track */
   --color-positive-tint: #10301F;
-  --color-negative: #FF7A66;       /* money out warnings, over budget */
-  --color-negative-tint: #341612;
-  --color-accent: #3BC0CE;         /* teal: savings + goals */
-  --color-accent-tint: #0C2C31;
+  --color-negative: #F56A5C;       /* money out, over budget */
+  --color-negative-tint: #351514;
 
   /* ---- Text ---- */
   --color-ink: #E9EEF9;            /* primary text */
@@ -130,8 +127,8 @@
   --color-muted: #8493AC;          /* labels, captions */
 
   /* ---- Surfaces + lines ---- */
-  --color-surface: #141C2C;        /* cards (raised above canvas) */
-  --color-surface-sunken: #0E1522; /* inset areas, icon wells */
+  --color-surface: #131C2B;        /* cards (raised above canvas) */
+  --color-surface-sunken: #0D1520; /* inset areas, icon wells */
   --color-canvas: #0A0F1A;         /* page background (darkest) */
   --color-line: #26324A;           /* borders, dividers */
   --color-glow: rgba(255, 255, 255, 0.22); /* moving sheen on filled bars */

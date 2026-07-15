@@ -35,14 +35,17 @@ sign-off first. When in doubt, reuse an existing token or component, or ask.
 
 5. **Mobile first, and it must pass the test.** The dashboard grid collapses to a single column at 640px and below. This is not a preference, it is enforced by the behaviour contract in `../tests/responsive.spec.js`, which runs at mobile, tablet, and desktop widths during verify.
 
-6. **Motion is tokenised, purposeful, and optional.** Animate with the duration and easing tokens (`--dur*`, `--ease*`), never magic timings. Motion should reinforce meaning (a figure counting up, a bar filling, a card settling in, a shimmer while loading), not decorate. All of it MUST collapse under `prefers-reduced-motion: reduce` (a global reset lives at the bottom of `components.css`; JS animations check the `prefersReducedMotion()` helper). Keep entrance/transform animation off anything the behaviour contract measures (the account-summary cards fade only).
+6. **Motion is tokenised, purposeful, and optional.** Animate with the duration and easing tokens (`--dur*`, `--ease*`), never magic timings. Motion should reinforce meaning (a bar filling, a card settling in, a shimmer while loading), not decorate. All of it MUST collapse under `prefers-reduced-motion: reduce` (a global reset lives at the bottom of `components.css`; JS animations check the `prefersReducedMotion()` helper). Keep entrance/transform animation off anything the behaviour contract measures (the account-summary cards fade only).
 
 ## The palette
-Meridian's palette is deliberately lean ("Graphite & Indigo"): one indigo action
-colour (`--color-primary`), a deep teal for savings and goals (`--color-accent`),
-the two money semantics (`--color-positive` / `--color-negative`), and a cool
-neutral ink + surface scale. Fewer hues read as more premium and keep money
-meaning unambiguous. Adding a new hue is a Rule 0 change, so ask first.
+Meridian's palette is deliberately lean: **three hues, not five.** One deep blue
+family carries brand, actions, and savings/goals (`--color-brand` /
+`--color-primary` / `--color-primary-tint`); the only other hues are the two
+money semantics (`--color-positive` green in, `--color-negative` red out); the
+rest is a cool neutral ink + surface scale. Fewer colours read as more
+trustworthy and keep money meaning unambiguous. The secondary button uses ink
+text (brand shows on its border/hover) so it stays AA in both themes. Adding a
+new hue is a Rule 0 change, so ask first.
 
 ## See the system
 Two galleries render the DLS:

@@ -38,8 +38,6 @@ const COLOR_TOKENS = [
   "--color-positive-tint",
   "--color-negative",
   "--color-negative-tint",
-  "--color-accent",
-  "--color-accent-tint",
   "--color-ink",
   "--color-ink-soft",
   "--color-muted",

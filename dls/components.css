@@ -124,7 +124,7 @@
 }
 .mrdn-btn--secondary {
   background: var(--color-surface);
-  color: var(--color-primary);
+  color: var(--color-ink); /* ink text keeps AA in both themes; brand shows on the border/hover */
   border-color: var(--color-line);
 }
 .mrdn-btn--secondary:not(:disabled):hover { border-color: var(--color-primary); }
@@ -148,7 +148,8 @@
 }
 .mrdn-pill--positive { background: var(--color-positive-tint); color: var(--color-positive); }
 .mrdn-pill--negative { background: var(--color-negative-tint); color: var(--color-negative); }
-.mrdn-pill--accent { background: var(--color-accent-tint); color: var(--color-accent); }
+/* --accent is the brand-blue highlight pill (savings/goals). */
+.mrdn-pill--accent { background: var(--color-primary-tint); color: var(--color-primary); }
 
 /* ---- List + row: transactions, activity ---- */
 .mrdn-list { display: flex; flex-direction: column; }
@@ -222,7 +223,7 @@
 .mrdn-progress__fill {
   position: relative;
   height: 100%;
-  background: var(--color-accent);
+  background: var(--color-primary);
   border-radius: inherit;
   overflow: hidden;
   transition: width var(--dur-slow) var(--ease-out);
