@@ -38,12 +38,12 @@ respect `prefers-reduced-motion`, and be built from DLS tokens (no raw colour
 values). Verify it running in the app before handing back for review.
 **Requirements**: D-01 to D-11 (locked CONTEXT.md decisions; no formal REQ-IDs)
 **Depends on:** Phase 3
-**Plans:** 3 plans
+**Plans:** 3/3 plans complete
 
 Plans:
 - [x] 04-01-PLAN.md — Wave 0: fixed gradient layer component + base token-composed CSS + mount + Playwright smoke suite (D-01, D-02, D-03, D-10, D-11)
 - [x] 04-02-PLAN.md — Wave 1: add the one --dur-breath motion token to dls/tokens.css (RULE 0 gated, human-confirms value) (D-07)
-- [ ] 04-03-PLAN.md — Wave 2: pointer rAF parallax tracking + mobile breathing fallback + reduced-motion JS gate (D-04, D-05, D-06, D-08, D-09)
+- [x] 04-03-PLAN.md — Wave 2: pointer rAF parallax tracking + mobile breathing fallback + reduced-motion JS gate (D-04, D-05, D-06, D-08, D-09)
 
 ### Phase 5: Charting foundation (backlog)
 
