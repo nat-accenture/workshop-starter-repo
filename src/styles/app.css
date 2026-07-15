@@ -156,7 +156,7 @@ a { color: inherit; }
 .gradient-bg {
   position: fixed;
   inset: 0;
-  z-index: 1;             /* below .app-bar (z-index: 10) — never covers the header */
+  z-index: -1;            /* behind app content per D-02/D-03: above the page canvas, below cards and the app-bar (z-index: 10) */
   pointer-events: none;   /* never intercepts clicks / form input */
   background: radial-gradient(
     ellipse 80% 60% at var(--mx, 50%) var(--my, 50%),

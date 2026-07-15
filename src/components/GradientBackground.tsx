@@ -10,6 +10,7 @@ export function GradientBackground() {
   const [isFinePointer, setIsFinePointer] = useState(
     () => window.matchMedia?.("(pointer: fine)").matches ?? true,
   );
+  const [reduceMotion, setReduceMotion] = useState(() => prefersReducedMotion());
   const layerRef = useRef<HTMLDivElement>(null);
 
   // Effect A: mode switch -- listen for pointer-type change (e.g. mouse plugged in/out).
@@ -18,6 +19,16 @@ export function GradientBackground() {
     if (!window.matchMedia) return;
     const mq = window.matchMedia("(pointer: fine)");
     const onChange = () => setIsFinePointer(mq.matches);
+    mq.addEventListener("change", onChange);
+    return () => mq.removeEventListener("change", onChange);
+  }, []);
+
+  // Effect A2: reduced-motion switch -- re-evaluate live when the OS setting toggles, so the
+  // parallax loop stops/starts without a reload (accessibility; CLAUDE.md motion standing rule).
+  useEffect(() => {
+    if (!window.matchMedia) return;
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const onChange = () => setReduceMotion(mq.matches);
     mq.addEventListener("change", onChange);
     return () => mq.removeEventListener("change", onChange);
   }, []);
@@ -54,7 +65,9 @@ export function GradientBackground() {
       window.removeEventListener("pointermove", onPointerMove);
       cancelAnimationFrame(frameId);
     };
-  }, [isFinePointer]);
+    // reduceMotion is a dep so toggling OS reduced-motion re-runs this effect: the cleanup
+    // cancels the loop and the prefersReducedMotion() guard early-returns (D-09, live).
+  }, [isFinePointer, reduceMotion]);
 
   const className = ["gradient-bg", !isFinePointer && "gradient-bg--breathing"]
     .filter(Boolean).join(" ");
