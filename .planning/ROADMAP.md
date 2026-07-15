@@ -42,7 +42,7 @@ values). Verify it running in the app before handing back for review.
 
 Plans:
 - [x] 04-01-PLAN.md — Wave 0: fixed gradient layer component + base token-composed CSS + mount + Playwright smoke suite (D-01, D-02, D-03, D-10, D-11)
-- [ ] 04-02-PLAN.md — Wave 1: add the one --dur-breath motion token to dls/tokens.css (RULE 0 gated, human-confirms value) (D-07)
+- [x] 04-02-PLAN.md — Wave 1: add the one --dur-breath motion token to dls/tokens.css (RULE 0 gated, human-confirms value) (D-07)
 - [ ] 04-03-PLAN.md — Wave 2: pointer rAF parallax tracking + mobile breathing fallback + reduced-motion JS gate (D-04, D-05, D-06, D-08, D-09)
 
 ### Phase 5: Charting foundation (backlog)
